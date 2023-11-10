@@ -51,7 +51,7 @@
         android:layout_height="match_parent"
         android:layout_below="@id/searchViewhome"
         android:padding="16dp"
-        android:id="@+id/recycler_view"/>
+        android:id="@+id/recycler_view_Category"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_category_btn"

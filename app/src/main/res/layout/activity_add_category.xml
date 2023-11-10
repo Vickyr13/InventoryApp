@@ -58,7 +58,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:id="@+id/notes_title_text"
+            android:id="@+id/category_title_text"
             android:hint="Descripcion"
             android:textSize="20sp"
             android:textStyle="bold"
