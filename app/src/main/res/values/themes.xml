@@ -6,4 +6,8 @@
     </style>
 
     <style name="Theme.InventoryApp" parent="Base.Theme.InventoryApp" />
+    <style name="MySearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <!-- Cambia el fondo a tu recurso de fondo personalizado -->
+        <item name="android:background">@drawable/border_notes</item>
+    </style>
 </resources>

@@ -21,6 +21,30 @@
         android:theme="@style/Theme.InventoryApp"
         tools:targetApi="31">
         <activity
+            android:name=".views.suppliers.AddSuppliersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.sales.NewSalesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.products.AddProductsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.category.AddCategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.suppliers.SuppliersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.sales.SalesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.category.CategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.products.ProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".views.login_logout.RegisterActivity"
             android:exported="false" />
         <activity

@@ -81,11 +81,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:text="Registrarme"
-                    android:id="@+id/loginButton"
+                    android:id="@+id/registerButton"
                     android:textSize="18sp"
                     android:layout_marginTop="30dp"
                     android:backgroundTint="@color/md_cyan_400"
                     app:cornerRadius = "20dp"/>
+
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
         <LinearLayout
@@ -104,15 +106,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:id="@+id/txtCreateAccountBtn"
+                android:id="@+id/txtLoginBtn"
                 android:text=" Login"/>
         </LinearLayout>
-
-
-
-
-
     </LinearLayout>
-
-
 </ScrollView>
