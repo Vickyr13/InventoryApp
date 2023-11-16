@@ -15,8 +15,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.example.inventoryapp.adapters.CategoriaAdapter;
+import com.example.inventoryapp.models.CategoriaModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,8 +30,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import es.dmoral.toasty.Toasty;
 
 public class AddCategoryActivity extends AppCompatActivity {
 
@@ -39,11 +46,15 @@ public class AddCategoryActivity extends AppCompatActivity {
         private FirebaseFirestore firestore;
         private FirebaseStorage storage;
         private StorageReference storageRef;
+        private TextView pageTitle;
 
-        private static final int PICK_IMAGE_REQUEST = 1;
+
+    private static final int PICK_IMAGE_REQUEST = 1;
         private Uri imageUri;
+        private boolean isEditMode = false;
 
-        // Utilizando ActivityResultLauncher para manejar la selección de imágenes
+
+    // Utilizando ActivityResultLauncher para manejar la selección de imágenes
         private final ActivityResultLauncher<String> imagePickerLauncher = registerForActivityResult(
                 new ActivityResultContracts.GetContent(),
                 new ActivityResultCallback<Uri>() {
@@ -70,6 +81,7 @@ public class AddCategoryActivity extends AppCompatActivity {
             categoryImage = findViewById(R.id.category_image);
             selectImageBtn = findViewById(R.id.select_image_btn);
             saveCategoryBtn = findViewById(R.id.save_category_btn);
+            pageTitle = findViewById(R.id.page_title);
 
             selectImageBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -84,6 +96,25 @@ public class AddCategoryActivity extends AppCompatActivity {
                     saveToFirestore();
                 }
             });
+
+            //mode edit
+            Intent intent = getIntent();
+            if(intent.hasExtra("EDIT_MODE")){
+                isEditMode = intent.getBooleanExtra("EDIT_MODE", false);
+                if(isEditMode){
+                    setupEditMode();
+                    String categoryId =intent.getStringExtra("id");
+                    String categoryTitle =intent.getStringExtra("title");
+                    String categoryImageUrl =intent.getStringExtra("imageUrl");
+                    notesTitleText.setText(categoryTitle);
+                    if (categoryImageUrl != null && !categoryImageUrl.isEmpty()) {
+                        // Cargar la imagen existente utilizando Glide
+                        Glide.with(this)
+                                .load(categoryImageUrl)
+                                .into(categoryImage);
+                    }
+                }
+            }
         }
 
         private void openImagePicker() {
@@ -145,21 +176,64 @@ public class AddCategoryActivity extends AppCompatActivity {
                 data.put("imageUrl", imageUrl);
             }
 
-            firestore.collection("categoria")
-                    .add(data)
-                    .addOnSuccessListener(new OnSuccessListener() {
-                        @Override
-                        public void onSuccess(Object o) {
-                            Toast.makeText(AddCategoryActivity.this, "Se guardo con exito!!", Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(AddCategoryActivity.this, "Error no se guardo", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+            if(isEditMode){
+                String categoryId = getIntent().getStringExtra("id");
+                firestore.collection("categoria")
+                        .document(categoryId)
+                        .update(data)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toasty.success(AddCategoryActivity.this, "Actualizada correctamenta!", Toasty.LENGTH_SHORT, true).show();
+                                finish();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toasty.error(AddCategoryActivity.this, "Error al momento de actualizar", Toasty.LENGTH_SHORT, true).show();
+                            }
+                        });
+            }else {
+                firestore.collection("categoria")
+                        .add(data)
+                        .addOnSuccessListener(new OnSuccessListener() {
+                            @Override
+                            public void onSuccess(Object o) {
+                                Toast.makeText(AddCategoryActivity.this, "Se guardo con exito!!", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(AddCategoryActivity.this, "Error no se guardo", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        }
+
+        //edit
+        private void setupEditMode(){
+            // Cambiar el texto del botón de guardar
+            //saveCategoryBtn.setText("Actualizar");
+            pageTitle.setText("Editar categoria");
+
+            // Obtener datos existentes y cargarlos en la interfaz
+            String existingTitle = getIntent().getStringExtra("title");
+            String existingImageUrl = getIntent().getStringExtra("imageUrl");
+
+            notesTitleText.setText(existingTitle);
+
+            if (existingImageUrl != null && !existingImageUrl.isEmpty()) {
+                // Cargar la imagen existente utilizando alguna biblioteca de carga de imágenes
+                // (por ejemplo, Glide o Picasso)
+                // imageView.load(existingImageUrl);
+                // Cargar la imagen existente utilizando Glide
+                Glide.with(this)
+                        .load(existingImageUrl)
+                        .into(categoryImage);
+            }
         }
 
 }

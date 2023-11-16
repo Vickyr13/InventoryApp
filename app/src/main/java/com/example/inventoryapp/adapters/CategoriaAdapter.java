@@ -1,4 +1,4 @@
-package com.example.inventoryapp.views.category;
+package com.example.inventoryapp.adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.inventoryapp.R;
+import com.example.inventoryapp.models.CategoriaModel;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -24,6 +25,8 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.View
 
     private final List<CategoriaModel> categoriaList;
     private final Context context;
+    private OnItemClickListener itemClickListener;
+
 
     public CategoriaAdapter(Context context, List<CategoriaModel> categoriaList) {
         this.context = context;
@@ -50,6 +53,13 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.View
                 .error(R.drawable.img_productos)
                 .into(holder.categoryImageView);
 
+        //edit
+        holder.itemView.setOnClickListener(v -> {
+            if (itemClickListener != null) {
+                itemClickListener.onItemClick(categoria);
+            }
+        });
+
         // Configurar el clic de eliminación
         holder.deleteCategoryImageView.setOnClickListener(v -> {
             // Llamar al método para eliminar la categoría
@@ -61,6 +71,14 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.View
     @Override
     public int getItemCount() {
         return categoriaList.size();
+    }
+    //edit
+    public interface OnItemClickListener {
+        void onItemClick(CategoriaModel categoria);
+    }
+    //edit
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.itemClickListener = listener;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -75,7 +93,6 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.View
             deleteCategoryImageView = itemView.findViewById(R.id.delete_category);
         }
     }
-
     private void showDeleteConfirmationDialog(CategoriaModel categoria) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Confirmar eliminación");

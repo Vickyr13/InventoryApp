@@ -4,16 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.inventoryapp.R;
-import com.example.inventoryapp.views.main.MainActivity;
+import com.example.inventoryapp.adapters.CategoriaAdapter;
+import com.example.inventoryapp.models.CategoriaModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -45,6 +41,19 @@ public class CategoryActivity extends AppCompatActivity {
 
         // Cargar datos de Firestore
         loadCategoriaData();
+        //editar datos de Firestore
+        categoriaAdapter.setOnItemClickListener(new CategoriaAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(CategoriaModel categoria) {
+                // Abrir la actividad AddCategoryActivity y pasar la información del elemento seleccionado
+                Intent intent = new Intent(CategoryActivity.this, AddCategoryActivity.class);
+                intent.putExtra("EDIT_MODE", true);
+                intent.putExtra("id", categoria.getId());
+                intent.putExtra("title", categoria.getTitle());
+                intent.putExtra("imageUrl", categoria.getImageUrl());
+                startActivity(intent);
+            }
+        });
     }
 
 

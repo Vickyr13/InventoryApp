@@ -1,4 +1,4 @@
-package com.example.inventoryapp.views.category;
+package com.example.inventoryapp.models;
 
 
 public class CategoriaModel {

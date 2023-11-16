@@ -1,9 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding= "16dp"
     tools:context=".views.suppliers.AddSuppliersActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+      <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/title_bar_layout">
+
+        <TextView
+            android:id="@+id/page_title_suppliers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="16dp"
+            android:text="Agregar proveedores"
+            android:textColor="@color/md_blue_grey_500"
+            android:textSize="24sp"/>
+
+        <ImageButton
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:id="@+id/save_suppliers_btn"
+            android:src="@drawable/icon_save"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_alignTop="@id/page_title_suppliers"
+            app:tint="@color/md_blue_grey_500"
+            android:background="?attr/selectableItemBackgroundBorderless"
+
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/title_bar_layout"
+        android:orientation="vertical"
+        android:padding="3dp"
+        android:layout_marginVertical="26dp"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/rounder_corner">
+
+        <ImageView
+            android:id="@+id/category_image"
+            android:layout_width="66dp"
+            android:layout_height="72dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="1dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_image_search" />
+
+        <Button
+            android:id="@+id/select_image_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/category_image"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:text="Seleccionar imagen"
+            android:layout_gravity="center"
+            app:backgroundTint="@color/md_blue_grey_500"
+            android:onClick="onSelectImageClicked"/>
+
+        <TextView
+            android:id="@+id/page_title_addns"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="1dp"
+            android:text="Nombre del proveedor"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/editNameSupplier"
+            android:hint="Nombre de proveedor"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginVertical="8dp"
+            android:padding="12dp"
+            android:textColor="@color/black"
+            android:background="@drawable/borderinput"
+            android:maxLines="1"/>
+
+        <TextView
+            android:id="@+id/title_addnc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="1dp"
+            android:text="Nombre del contacto"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/editNameContact"
+            android:hint="Nombre de proveedor"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginVertical="8dp"
+            android:padding="12dp"
+            android:textColor="@color/black"
+            android:background="@drawable/borderinput"
+            android:maxLines="1"/>
+        <TextView
+            android:id="@+id/title_addne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="1dp"
+            android:text="Numero de telefono"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/editPhone"
+            android:hint="Numero de telefono"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginVertical="8dp"
+            android:padding="12dp"
+            android:textColor="@color/black"
+            android:background="@drawable/borderinput"
+            android:maxLines="1"/>
+        <TextView
+            android:id="@+id/title_addDirect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="1dp"
+            android:text="Ingresar direccion"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/editDirect"
+            android:hint="Direccion"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginVertical="8dp"
+            android:padding="12dp"
+            android:textColor="@color/black"
+            android:background="@drawable/borderinput"
+            android:maxLines="1"/>
+        <TextView
+            android:id="@+id/title_addEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="1dp"
+            android:text="Ingresar correo"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/editEmail"
+            android:hint="Correo electronico"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginVertical="8dp"
+            android:padding="12dp"
+            android:textColor="@color/black"
+            android:background="@drawable/borderinput"
+            android:maxLines="1"/>
+    </LinearLayout>
+
+</RelativeLayout>
