@@ -1,9 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding= "16dp"
     tools:context=".views.products.AddProductsActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/title_bar_layout">
+
+        <TextView
+            android:id="@+id/page_title_suppliers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="16dp"
+            android:text="Agregar productos"
+            android:textColor="@color/md_blue_grey_500"
+            android:textSize="24sp"/>
+
+        <ImageButton
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:id="@+id/save_suppliers_btn"
+            android:src="@drawable/icon_save"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_alignTop="@id/page_title_suppliers"
+            app:tint="@color/md_blue_grey_500"
+            android:background="?attr/selectableItemBackgroundBorderless"
+
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/title_bar_layout"
+        android:orientation="vertical"
+        android:padding="3dp"
+        android:layout_marginVertical="26dp"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/rounder_corner">
+
+        <TextView
+            android:id="@+id/page_title_addnp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="1dp"
+            android:text="Nombre del producto"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/editNameProduct"
+            android:hint="Nombre de producto"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginVertical="8dp"
+            android:padding="12dp"
+            android:textColor="@color/black"
+            android:background="@drawable/borderinput"
+            android:maxLines="1"/>
+
+        <TextView
+            android:id="@+id/title_addnc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="1dp"
+            android:text="Nombre del proveedor"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+        <Spinner
+            android:id="@+id/spinnerNameSuppliers"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginVertical="8dp"
+            android:padding="12dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:background="@drawable/borderinput"/>
+        <TextView
+            android:id="@+id/title_addCat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="1dp"
+            android:text="Nombre de la categoria"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+        <Spinner
+            android:id="@+id/spinnerNameCategory"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginVertical="8dp"
+            android:padding="12dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:background="@drawable/borderinput"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal">
+
+            <!-- Primer grupo -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingRight="2dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/title_addQ"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cantidad"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spinnerQuantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="8dp"
+                    android:padding="19dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:background="@drawable/borderinput" />
+
+            </LinearLayout>
+
+            <!-- Segundo grupo -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="2dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/title_addP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Precio"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:hint="Precio"
+                    android:inputType="number"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginVertical="8dp"
+                    android:padding="12dp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/borderinput"
+                    android:maxLines="1" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/title_addDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="1dp"
+            android:text="Descripcion"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/editDesc"
+            android:hint="Describir producto"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginVertical="8dp"
+            android:padding="12dp"
+            android:textColor="@color/black"
+            android:background="@drawable/borderinput"
+            android:maxLines="1"/>
+        <ImageView
+            android:id="@+id/category_image"
+            android:layout_width="66dp"
+            android:layout_height="72dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="1dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_image_search" />
+
+        <Button
+            android:id="@+id/select_image_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/category_image"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:text="Seleccionar imagen"
+            android:layout_gravity="center"
+            app:backgroundTint="@color/md_blue_grey_500"
+            android:onClick="onSelectImageClicked"/>
+    </LinearLayout>
+
+</RelativeLayout>
+</ScrollView>
